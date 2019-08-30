@@ -12,7 +12,7 @@ object Answers {
   }
 
   def isSorted[A](as: Array[A], ordered: (A, A) => Boolean): Boolean =
-    as.slice(0, as.length-1).zipWithIndex.foldLeft[Boolean](true) {
+    as.slice(0, as.length - 1).zipWithIndex.foldLeft[Boolean](true) {
       case (a, (e, index)) => a && ordered(e, as(index + 1))
     }
 
@@ -30,5 +30,10 @@ object Answers {
   def setHead[A](xs: List[A], e: A): List[A] = xs match {
     case _ :: ts => e :: ts
     case Nil | List(_) => List(e)
+  }
+
+  def drop[A](xs: List[A], n: Int): List[A] = n match {
+    case 0 => tail(xs)
+    case _ => drop(tail(xs), n - 1)
   }
 }
