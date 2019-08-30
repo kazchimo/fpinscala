@@ -1,0 +1,6 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:15:38: missing argument list for method fold in trait TraversableOnce[0m
+[0m[[0m[31merror[0m] [0m[0mUnapplied methods are only converted to functions when a function type is expected.[0m
+[0m[[0m[31merror[0m] [0m[0mYou can make this conversion explicit by writing `fold _` or `fold(_)(_)` instead of `fold`.[0m
+[0m[[0m[31merror[0m] [0m[0m    as.slice(0, -1).zipWithIndex.fold()[0m
+[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
