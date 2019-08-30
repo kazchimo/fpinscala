@@ -24,6 +24,11 @@ object Answers {
 
   def tail[A](xs: List[A]): List[A] = xs match {
     case _ :: ts => ts
-    case Nil => Nil
+    case Nil | List(_) => Nil
+  }
+
+  def setHead[A](xs: List[A], e: A): List[A] = xs match {
+    case _ :: ts => e :: ts
+    case Nil | List(_) => List(e)
   }
 }
