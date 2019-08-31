@@ -36,4 +36,9 @@ object Answers {
     case 0 => tail(xs)
     case _ => drop(tail(xs), n - 1)
   }
+
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Nil => Nil
+    case h :: ts => if (f(h)) dropWhile(ts, f) else l
+  }
 }
