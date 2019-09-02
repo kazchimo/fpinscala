@@ -41,4 +41,15 @@ object Answers {
     case Nil => Nil
     case h :: ts => if (f(h)) dropWhile(ts, f) else l
   }
+
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case _ :: Nil => Nil
+    case h :: t => h :: init(t)
+  }
+
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B):B = as match {
+    case Nil => z
+    case x :: xs => f(x, foldRight(xs, z)(f))
+  }
 }
