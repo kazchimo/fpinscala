@@ -52,4 +52,8 @@ object Answers {
     case Nil => z
     case x :: xs => f(x, foldRight(xs, z)(f))
   }
+
+  def product2(ns: List[Double]): Double = foldRight(ns, 1.0)(_ * _)
+
+  def length[A](as: List[A]): Int = foldRight(as, 0)((_, ac) => ac + 1)
 }
