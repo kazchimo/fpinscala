@@ -48,7 +48,7 @@ object Answers {
     case h :: t => h :: init(t)
   }
 
-  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B):B = as match {
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
     case Nil => z
     case x :: xs => f(x, foldRight(xs, z)(f))
   }
@@ -56,4 +56,20 @@ object Answers {
   def product2(ns: List[Double]): Double = foldRight(ns, 1.0)(_ * _)
 
   def length[A](as: List[A]): Int = foldRight(as, 0)((_, ac) => ac + 1)
+
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = {
+    def fold(xs: List[A], n: Int, prev: B): B = n match {
+      case _ if n > 1 => fold(xs.tail, n - 1, f(prev, xs.head))
+      case _ if n == 1 => f(prev, xs.head)
+    }
+
+    fold(as, as.length, z)
+  }
+
+  def foldLeft2[A, B](l: List[A], z: B)(f: (B, A) => B): B = l match {
+    case Nil => z
+    case x :: xs => foldLeft2(xs, f(z, x))(f)
+  }
+
+  def leftSum(ints: List[Int]): Int = foldLeft2(ints, 0)(_ + _)
 }
