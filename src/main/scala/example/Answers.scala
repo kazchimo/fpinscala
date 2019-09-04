@@ -76,4 +76,6 @@ object Answers {
   def leftProduct(ds: List[Double]): Double = foldLeft2(ds, 1.0)(_ * _)
 
   def leftLength[A](as: List[A]): Int = foldLeft2(as, 0)((ac, _) => ac + 1)
+
+  def reverse[A](as: List[A]): List[A] = as.foldLeft(Nil: List[A])((ac, e) => e :: ac)
 }
