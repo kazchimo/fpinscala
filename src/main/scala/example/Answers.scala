@@ -74,4 +74,6 @@ object Answers {
   def leftSum(ints: List[Int]): Int = foldLeft2(ints, 0)(_ + _)
 
   def leftProduct(ds: List[Double]): Double = foldLeft2(ds, 1.0)(_ * _)
+
+  def leftLength[A](as: List[A]): Int = foldLeft2(as, 0)((ac, _) => ac + 1)
 }
