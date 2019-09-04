@@ -78,4 +78,14 @@ object Answers {
   def leftLength[A](as: List[A]): Int = foldLeft2(as, 0)((ac, _) => ac + 1)
 
   def reverse[A](as: List[A]): List[A] = as.foldLeft(Nil: List[A])((ac, e) => e :: ac)
+
+  def foldLeftByFoldRight[A, B](as: List[A], z: B)(f: (B, A) => B): B
+    = as.reverse.foldRight(z)((a, b) => f(b, a))
+
+  def foldLeftByFoldRight1[A, B](as: List[A], z: B)(f: (B, A) => B): B
+    = as.foldRight((b: B) => b)((a, g) => b => g(f(a, b)))(z)
+
+  def foldRightByFoldLeft[A, B](as: List[A], z: B)(f: (A, B) => B): B
+    = as.foldLeft((b: B) => b)((g, a) => b => g(f(a, b)))(z)
+
 }
