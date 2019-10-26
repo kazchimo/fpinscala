@@ -95,4 +95,8 @@ object Answers {
 
   def appendViaFoldLeft[A](a1: List[A], a2: List[A]): List[A] =
     foldLeft(a2, a1)((a, b) => a :+ b)
+
+  // 3.15
+  def appendLists[A](as: List[A]*): List[A] =
+    foldRight(as.toList, Nil: List[A])((a, b) => a ++ b)
 }
