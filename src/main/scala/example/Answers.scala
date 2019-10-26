@@ -120,4 +120,10 @@ object Answers {
   }
 
   def removeOdds(as: List[Int]): List[Int] = filter(as)(_ % 2 == 0)
+
+  // 3.20
+  def flatMap[A, B](as: List[A])(f: A => List[B]): List[B] = as match {
+    case Nil => Nil
+    case h :: t => f(h) ++ flatMap(t)(f)
+  }
 }
