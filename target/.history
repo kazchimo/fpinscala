@@ -10,3 +10,10 @@ scala
 console
 compile
 console
+import example.Answers._
+import example
+import
+import example
+console
+clean
+console
