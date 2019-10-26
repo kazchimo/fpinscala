@@ -102,4 +102,7 @@ object Answers {
 
   // 3.16
   def plusOne(as: List[Int]): List[Int] = as.map(_ + 1)
+
+  // 3.17
+  def DoubleToString(as: List[Double]): List[String] = as.map(_.toString)
 }
