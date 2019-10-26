@@ -105,4 +105,10 @@ object Answers {
 
   // 3.17
   def DoubleToString(as: List[Double]): List[String] = as.map(_.toString)
+
+  // 3.18
+  def map[A, B](as: List[A])(f: A => B): List[B] = as match {
+    case Nil => Nil
+    case h :: t => f(h) +: map(t)(f)
+  }
 }
