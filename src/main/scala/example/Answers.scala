@@ -123,7 +123,11 @@ object Answers {
 
   // 3.20
   def flatMap[A, B](as: List[A])(f: A => List[B]): List[B] = as match {
-    case Nil => Nil
+    case Nil    => Nil
     case h :: t => f(h) ++ flatMap(t)(f)
   }
+
+  // 3.21
+  def filterViaFlatMap[A](as: List[A])(f: A => Boolean): List[A] =
+    flatMap(as)(a => if (f(a)) List(a) else Nil)
 }
