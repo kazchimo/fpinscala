@@ -99,4 +99,7 @@ object Answers {
   // 3.15
   def appendLists[A](as: List[A]*): List[A] =
     foldRight(as.toList, Nil: List[A])((a, b) => a ++ b)
+
+  // 3.16
+  def plusOne(as: List[Int]): List[Int] = as.map(_ + 1)
 }
