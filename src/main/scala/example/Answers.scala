@@ -134,8 +134,15 @@ object Answers {
   // 3.22
   def zipMerge(as: List[Int], bs: List[Int]): List[Int] = {
     def _zipMerge(longs: List[Int], shorts: List[Int]) =
-      longs.take(shorts.length).zip(shorts).map(e => e._1 + e._2) :::
-        longs.drop(shorts.length)
+      longs.take(shorts.length).zip(shorts).map(e => e._1 + e._2)
+
+    if (as.length > bs.length) _zipMerge(as, bs) else _zipMerge(bs, as)
+  }
+
+  // 3.23
+  def zipWith[A, B](as: List[A], bs: List[A], adder: (A, A) => B): List[B] = {
+    def _zipMerge(longs: List[A], shorts: List[A]) =
+      longs.take(shorts.length).zip(shorts).map(e => adder(e._1, e._2))
 
     if (as.length > bs.length) _zipMerge(as, bs) else _zipMerge(bs, as)
   }
