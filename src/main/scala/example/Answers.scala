@@ -130,4 +130,13 @@ object Answers {
   // 3.21
   def filterViaFlatMap[A](as: List[A])(f: A => Boolean): List[A] =
     flatMap(as)(a => if (f(a)) List(a) else Nil)
+
+  // 3.22
+  def zipMerge(as: List[Int], bs: List[Int]): List[Int] = {
+    def _zipMerge(longs: List[Int], shorts: List[Int]) =
+      longs.take(shorts.length).zip(shorts).map(e => e._1 + e._2) :::
+        longs.drop(shorts.length)
+
+    if (as.length > bs.length) _zipMerge(as, bs) else _zipMerge(bs, as)
+  }
 }

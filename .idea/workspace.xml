@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8120509-cde4-4e8b-95d2-d41c1df3ffcb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/example/Answers.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/example/Answers.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/streams/compile/console/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/console/$global/streams/out" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/example/Answers.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="133" column="19" selection-start-line="133" selection-start-column="19" selection-end-line="133" selection-end-column="19" />
+            <state relative-caret-position="646">
+              <caret line="137" column="37" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -48,8 +50,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-960" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-1920" />
     <option name="y" value="23" />
     <option name="width" value="960" />
     <option name="height" value="1057" />
@@ -166,18 +168,19 @@
       <workItem from="1567238811946" duration="2848000" />
       <workItem from="1567437539642" duration="4306000" />
       <workItem from="1567591301341" duration="3319000" />
-      <workItem from="1572082932019" duration="5829000" />
+      <workItem from="1572082932019" duration="6460000" />
+      <workItem from="1573554657612" duration="879000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30849000" />
+    <option name="totallyTimeSpent" value="32359000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="23" width="1920" height="1057" extended-state="6" />
+    <frame x="-1920" y="23" width="960" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13471779" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27838427" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -200,7 +203,7 @@
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Mypy" order="14" />
       <window_info anchor="bottom" id="Version Control" order="15" />
-      <window_info anchor="right" id="Key Promoter X" />
+      <window_info anchor="right" id="make" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -213,6 +216,7 @@
       <window_info anchor="right" id="Database" order="9" />
       <window_info anchor="right" id="Palette&#9;" order="10" />
       <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="right" id="Key Promoter X" order="12" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,10 +258,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.12.8-sources.jar!/scala/collection/LinearSeqOptimized.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="121" column="6" selection-start-line="121" selection-start-column="6" selection-end-line="121" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/example/Answers.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="133" column="19" selection-start-line="133" selection-start-column="19" selection-end-line="133" selection-end-column="19" />
+        <state relative-caret-position="646">
+          <caret line="137" column="37" selection-start-line="137" selection-start-column="37" selection-end-line="137" selection-end-column="37" />
         </state>
       </provider>
     </entry>
