@@ -146,4 +146,23 @@ object Answers {
 
     if (as.length > bs.length) _zipMerge(as, bs) else _zipMerge(bs, as)
   }
+
+  // 3.24
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean =
+    if (sup.length >= sub.length) {
+      lazy val subLen = sub.length
+      lazy val end = sup.length - subLen
+
+      def judge(start: Int = 0): Boolean =
+        if (end < start)
+          false
+        else {
+          if (sup.slice(start, start + subLen) == sub)
+            true
+          else
+            judge(start + 1)
+        }
+
+      judge()
+    } else false
 }
