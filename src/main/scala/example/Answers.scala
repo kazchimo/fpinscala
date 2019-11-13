@@ -172,10 +172,19 @@ object Answers {
   case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
   def treeNodeSize[A](tree: Tree[A]): Int = tree match {
-    case _: Leaf[A]                         => 1
-    case Branch(_: Leaf[A], _: Leaf[A])     => 3
-    case Branch(l: Branch[A], _: Leaf[A])   => treeNodeSize(l) + 1
-    case Branch(_: Leaf[A], r: Branch[A])   => treeNodeSize(r) + 1
+    case _: Leaf[A]                       => 1
+    case Branch(_: Leaf[A], _: Leaf[A])   => 3
+    case Branch(l: Branch[A], _: Leaf[A]) => treeNodeSize(l) + 1
+    case Branch(_: Leaf[A], r: Branch[A]) => treeNodeSize(r) + 1
     case Branch(l: Branch[A], r: Branch[A]) => treeNodeSize(l) + treeNodeSize(r) + 1
+  }
+
+  // 3.26
+  def treeMaximum(tree: Tree[Int]): Int = tree match {
+    case l: Leaf[Int]                         => l.value
+    case Branch(l: Leaf[Int], r: Leaf[Int])   => l.value max r.value
+    case Branch(l: Branch[Int], r: Leaf[Int]) => treeMaximum(l) max r.value
+    case Branch(l: Leaf[Int], r: Branch[Int]) => l.value max treeMaximum(r)
+    case Branch(l: Branch[Int], r: Branch[Int]) => treeMaximum(l) max treeMaximum(r)
   }
 }

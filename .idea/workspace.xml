@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8120509-cde4-4e8b-95d2-d41c1df3ffcb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/example/Answers.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/example/Answers.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/compile/console/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/console/$global/streams/out" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/example/Answers.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="769">
-              <caret line="174" column="21" selection-start-line="174" selection-start-column="21" selection-end-line="174" selection-end-column="21" />
+            <state relative-caret-position="328">
+              <caret line="186" column="2" selection-start-line="186" selection-start-column="2" selection-end-line="186" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -169,16 +167,15 @@
       <workItem from="1567591301341" duration="3319000" />
       <workItem from="1572082932019" duration="6460000" />
       <workItem from="1573554657612" duration="3750000" />
-      <workItem from="1573625634997" duration="1353000" />
+      <workItem from="1573625634997" duration="3502000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36583000" />
+    <option name="totallyTimeSpent" value="38732000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="840" height="1027" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.2669173" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -197,7 +194,7 @@
       <window_info anchor="bottom" id="Build" order="7" weight="0.32953367" />
       <window_info anchor="bottom" id="SBT Console" order="8" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="9" weight="0.32953367" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.50673574" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.5058824" />
       <window_info anchor="bottom" id="Docker" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
@@ -267,8 +264,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/example/Answers.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
-          <caret line="174" column="21" selection-start-line="174" selection-start-column="21" selection-end-line="174" selection-end-column="21" />
+        <state relative-caret-position="328">
+          <caret line="186" column="2" selection-start-line="186" selection-start-column="2" selection-end-line="186" selection-end-column="2" />
         </state>
       </provider>
     </entry>

@@ -1,11 +1,5 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:86:52: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : a.type (with underlying type A)[0m
-[0m[[0m[31merror[0m] [0m[0m required: B[0m
-[0m[[0m[31merror[0m] [0m[0m    = as.foldRight((b: B) => b)((a, g) => b => g(f(a, b)))(z)[0m
-[0m[[0m[31merror[0m] [0m[0m                                                   ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:86:55: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : b.type (with underlying type B)[0m
-[0m[[0m[31merror[0m] [0m[0m required: A[0m
-[0m[[0m[31merror[0m] [0m[0m    = as.foldRight((b: B) => b)((a, g) => b => g(f(a, b)))(z)[0m
-[0m[[0m[31merror[0m] [0m[0m                                                      ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:183:43: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: Branch(Leaf(_), Leaf(_))[0m
+[0m[[0m[33mwarn[0m] [0m[0m  def treeMaximum(tree: Tree[Int]): Int = tree match {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                          ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
