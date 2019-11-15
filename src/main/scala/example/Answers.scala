@@ -192,10 +192,16 @@ object Answers {
 
   // 3.27
   def depth(tree: Tree[_]): Int = tree match {
-    case _: Leaf[_]                     => 0
-    case Branch(_: Leaf[_], _: Leaf[_]) => 1
-    case Branch(l: Branch[_], _: Leaf[_]) => 1 + depth(l)
-    case Branch(_: Leaf[_], r: Branch[_]) => 1 + depth(r)
+    case _: Leaf[_]                         => 0
+    case Branch(_: Leaf[_], _: Leaf[_])     => 1
+    case Branch(l: Branch[_], _: Leaf[_])   => 1 + depth(l)
+    case Branch(_: Leaf[_], r: Branch[_])   => 1 + depth(r)
     case Branch(l: Branch[_], r: Branch[_]) => depth(l) max depth(r)
+  }
+
+  // 3.28
+  def treeMap[A, B](tree: Tree[A], f: A => B): Tree[B] = tree match {
+    case l: Leaf[A]   => Leaf(f(l.value))
+    case Branch(l, r) => Branch(treeMap(l, f), treeMap(r, f))
   }
 }
