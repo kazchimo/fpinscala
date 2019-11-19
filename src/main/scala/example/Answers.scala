@@ -174,8 +174,8 @@ object Answers {
   def treeNodeSize[A](tree: Tree[A]): Int = tree match {
     case _: Leaf[A]                       => 1
     case Branch(_: Leaf[A], _: Leaf[A])   => 3
-    case Branch(l: Branch[A], _: Leaf[A]) => treeNodeSize(l) + 1
-    case Branch(_: Leaf[A], r: Branch[A]) => treeNodeSize(r) + 1
+    case Branch(l: Branch[A], _: Leaf[A]) => treeNodeSize(l) + 2
+    case Branch(_: Leaf[A], r: Branch[A]) => treeNodeSize(r) + 2
     case Branch(l: Branch[A], r: Branch[A]) =>
       treeNodeSize(l) + treeNodeSize(r) + 1
   }
@@ -203,5 +203,87 @@ object Answers {
   def treeMap[A, B](tree: Tree[A], f: A => B): Tree[B] = tree match {
     case l: Leaf[A]   => Leaf(f(l.value))
     case Branch(l, r) => Branch(treeMap(l, f), treeMap(r, f))
+  }
+
+  // 3.29
+  def treeFold[A, B](tree: Tree[A],
+                     lf: Leaf[A] => B,
+                     llf: (Leaf[A], Leaf[A]) => B,
+                     blf: (Branch[A], Leaf[A]) => B,
+                     lbf: (Leaf[A], Branch[A]) => B,
+                     bbf: (Branch[A], Branch[A]) => B): B =
+    tree match {
+      case l: Leaf[A]                         => lf(l)
+      case Branch(l: Leaf[A], r: Leaf[A])     => llf(l, r)
+      case Branch(l: Branch[A], r: Leaf[A])   => blf(l, r)
+      case Branch(l: Leaf[A], r: Branch[A])   => lbf(l, r)
+      case Branch(l: Branch[A], r: Branch[A]) => bbf(l, r)
+    }
+
+  def foldSize[A](tree: Tree[A]): Int =
+    treeFold(
+      tree,
+      (_: Leaf[A]) => 1,
+      (_: Leaf[A], _: Leaf[A]) => 3,
+      (l: Branch[A], _: Leaf[A]) => foldSize(l) + 2,
+      (_: Leaf[A], r: Branch[A]) => foldSize(r) + 2,
+      (l: Branch[A], r: Branch[A]) => foldSize(l) + foldSize(r) + 1
+    )
+
+  def foldMaximum(tree: Tree[Int]): Int = treeFold(
+    tree,
+    (l: Leaf[Int]) => l.value,
+    (l: Leaf[Int], r: Leaf[Int]) => l.value max r.value,
+    (l: Branch[Int], r: Leaf[Int]) => treeMaximum(l) max r.value,
+    (l: Leaf[Int], r: Branch[Int]) => l.value max treeMaximum(r),
+    (l: Branch[Int], r: Branch[Int]) => treeMaximum(l) max treeMaximum(r)
+  )
+
+  def foldDepth(tree: Tree[_]): Int = treeFold(
+    tree,
+    (_: Leaf[_]) => 0,
+    (_: Leaf[_], _: Leaf[_]) => 1,
+    (l: Branch[_], _: Leaf[_]) => 1 + depth(l),
+    (_: Leaf[_], r: Branch[_]) => 1 + depth(r),
+    (l: Branch[_], r: Branch[_]) => depth(l) max depth(r)
+  )
+
+  def foldMap[A, B](tree: Tree[A], f: A => B): Tree[B] = {
+    val mapF = (l: Tree[A], r: Tree[A]) => Branch(treeMap(l, f), treeMap(r, f))
+    treeFold(tree, (l: Leaf[A]) => Leaf(f(l.value)), mapF, mapF, mapF, mapF)
+  }
+
+  def test3_29() = {
+    // for foldSize
+    val leaf = Leaf(1)
+    val branch = Branch(leaf, leaf)
+    val deepBranch = Branch(branch, leaf)
+
+    assert(foldSize(leaf) == 1)
+    assert(foldSize(branch) == 3)
+    assert(foldSize(deepBranch) == 5)
+
+    // for foldMaximum
+    val bigLeaf = Leaf(2)
+    val bigBranch = Branch(bigLeaf, deepBranch)
+
+    assert(foldMaximum(branch) == 1)
+    assert(foldMaximum(deepBranch) == 1)
+    assert(foldMaximum(bigBranch) == 2)
+
+    // for foldDepth
+    assert(foldDepth(leaf) == 0)
+    assert(foldDepth(branch) == 1)
+    assert(foldDepth(deepBranch) == 2)
+
+    // for foldMap
+    assert(foldMap(leaf, (a: Int) => a * 2) == Leaf(2))
+    assert(foldMap(branch, (a: Int) => a + 3) == Branch(Leaf(4), Leaf(4)))
+    assert(
+      foldMap(deepBranch, (a: Int) => a.toString) == Branch(
+        Branch(Leaf("1"), Leaf("1")),
+        Leaf("1")
+      )
+    )
   }
 }

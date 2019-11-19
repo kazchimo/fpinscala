@@ -1,6 +1,64 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:203:33: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : l.type (with underlying type example.Answers.Leaf[A])[0m
-[0m[[0m[31merror[0m] [0m[0m required: A[0m
-[0m[[0m[31merror[0m] [0m[0m    case l: Leaf[A]   => Leaf(f(l))[0m
-[0m[[0m[31merror[0m] [0m[0m                                ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:216:53: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Leaf[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Leaf[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Leaf is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case l: Leaf[_]                         => lf(l)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:217:54: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Leaf[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Leaf[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Leaf is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case Branch(l: Leaf[_], r: Leaf[_])     => llf(l, r)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:217:57: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Leaf[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Leaf[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Leaf is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case Branch(l: Leaf[_], r: Leaf[_])     => llf(l, r)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:218:54: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Branch[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Branch[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Branch is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case Branch(l: Branch[_], r: Leaf[_])   => blf(l, r)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:218:57: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Leaf[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Leaf[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Leaf is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case Branch(l: Branch[_], r: Leaf[_])   => blf(l, r)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:219:54: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Leaf[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Leaf[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Leaf is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case Branch(l: Leaf[_], r: Branch[_])   => lbf(l, r)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:219:57: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Branch[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Branch[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Branch is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case Branch(l: Leaf[_], r: Branch[_])   => lbf(l, r)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:220:54: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Branch[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Branch[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Branch is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case Branch(l: Branch[_], r: Branch[_]) => bbf(l, r)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:220:57: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : example.Answers.Branch[_][0m
+[0m[[0m[31merror[0m] [0m[0m required: example.Answers.Branch[A][0m
+[0m[[0m[31merror[0m] [0m[0mNote: _ <: A, but class Branch is invariant in type A.[0m
+[0m[[0m[31merror[0m] [0m[0mYou may wish to define A as +A instead. (SLS 4.5)[0m
+[0m[[0m[31merror[0m] [0m[0m      case Branch(l: Branch[_], r: Branch[_]) => bbf(l, r)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m9 errors found[0m
