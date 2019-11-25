@@ -248,7 +248,7 @@ object Answers {
     (l: Branch[_], r: Branch[_]) => depth(l) max depth(r)
   )
 
-  def foldMap[A, B](tree: Tree[A], f: A => B): Tree[B] = {
+  def foldMap[A, B](tree: Tree[A])(f: A => B): Tree[B] = {
     val mapF = (l: Tree[A], r: Tree[A]) => Branch(treeMap(l, f), treeMap(r, f))
     treeFold(tree, (l: Leaf[A]) => Leaf(f(l.value)), mapF, mapF, mapF, mapF)
   }
@@ -277,13 +277,61 @@ object Answers {
     assert(foldDepth(deepBranch) == 2)
 
     // for foldMap
-    assert(foldMap(leaf, (a: Int) => a * 2) == Leaf(2))
-    assert(foldMap(branch, (a: Int) => a + 3) == Branch(Leaf(4), Leaf(4)))
+    assert(foldMap(leaf)(_ * 2) == Leaf(2))
+    assert(foldMap(branch)(_ + 3) == Branch(Leaf(4), Leaf(4)))
     assert(
-      foldMap(deepBranch, (a: Int) => a.toString) == Branch(
+      foldMap(deepBranch)(_.toString) == Branch(
         Branch(Leaf("1"), Leaf("1")),
         Leaf("1")
       )
     )
+  }
+
+  import scala.{Either => _, Option => _}
+
+  // 4.1
+  sealed trait Option[+A] {
+    def map[B](f: A => B): Option[B] = this match {
+      case Some(v) => Some(f(v))
+      case None    => None
+    }
+
+    def flatMap[B](f: A => Option[B]): Option[B] = this map f getOrElse None
+
+    def getOrElse[B >: A](default: => B): B = this match {
+      case Some(v) => v
+      case None    => default
+    }
+
+    def orElse[B >: A](ob: => Option[B]): Option[B] = {
+      this map (Some(_)) getOrElse ob
+    }
+
+    def filter(f: A => Boolean): Option[A] =
+      flatMap(a => if (f(a)) Some(a) else None)
+  }
+  case class Some[+A](get: A) extends Option[A]
+  case object None extends Option[Nothing]
+
+  def test_41: Unit = {
+    val opt = Some(1)
+    val none: Option[Int] = None
+
+    assert(opt.map(_ * 2) == Some(2))
+    assert(none.map(_ * 2) == None)
+
+    assert(opt.flatMap((a: Int) => Some(a * 2)) == Some(2))
+    assert(opt.flatMap((_: Int) => None) == None)
+    assert(none.flatMap((_: Int) => Some(1)) == None)
+
+    assert(opt.getOrElse(2) == 1)
+    assert(none.getOrElse(2) == 2)
+
+    assert(opt.orElse(Some(2)) == Some(1))
+    assert(none.orElse(Some(2)) == Some(2))
+
+    assert(opt.filter((a: Int) => a == 1) == Some(1))
+    assert(opt.filter((a: Int) => a == 2) == None)
+    assert(none.filter((a: Int) => a == 1) == None)
   }
 }

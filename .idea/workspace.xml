@@ -49,13 +49,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/example/Answers.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3462">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-              <folding>
-                <element signature="e#5538#5923#0" />
-                <element signature="e#5969#6272#0" />
-                <element signature="e#6341#6461#0" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="299" lean-forward="true" selection-start-line="299" selection-end-line="299" />
             </state>
           </provider>
         </entry>
@@ -76,7 +71,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1920" />
+    <option name="x" value="-960" />
     <option name="y" value="23" />
     <option name="width" value="960" />
     <option name="height" value="1057" />
@@ -184,15 +179,18 @@
       <workItem from="1573625634997" duration="3832000" />
       <workItem from="1573810206868" duration="2153000" />
       <workItem from="1574068473923" duration="1268000" />
-      <workItem from="1574145148730" duration="1495000" />
+      <workItem from="1574145148730" duration="2838000" />
+      <workItem from="1574342252756" duration="9227000" />
+      <workItem from="1574681802311" duration="694000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43978000" />
+    <option name="totallyTimeSpent" value="55242000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="23" width="960" height="1057" extended-state="0" />
+    <frame x="-960" y="23" width="960" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.2669173" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -288,13 +286,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/example/Answers.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3462">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#5538#5923#0" />
-            <element signature="e#5969#6272#0" />
-            <element signature="e#6341#6461#0" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="299" lean-forward="true" selection-start-line="299" selection-end-line="299" />
         </state>
       </provider>
     </entry>
