@@ -334,4 +334,25 @@ object Answers {
     assert(opt.filter((a: Int) => a == 2) == None)
     assert(none.filter((a: Int) => a == 1) == None)
   }
+
+  // 4.2
+  def variance(xs: Seq[Double]): Option[Double] = {
+    def mean(xs: Seq[Double]) =
+      if (xs.isEmpty) None else Some(xs.sum / xs.length)
+
+    mean(xs) flatMap (m => mean(xs.map(x => math.pow(x - m, 2))))
+  }
+
+  // 4.3
+  def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+    for {
+      aContent <- a
+      bContent <- b
+    } yield f(aContent, bContent)
+
+  def sequence[A](a: List[Option[A]]): Option[List[A]] =
+    a.foldLeft(Some(List()): Option[List[A]])(
+      (a, e) => map2(a, e)((as, c) => as :+ c)
+    )
+
 }
