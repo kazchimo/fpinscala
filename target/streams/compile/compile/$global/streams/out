@@ -1,4 +1,4 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:320:27: example.Answers.Option[Int] and Int are unrelated: they will most likely never compare equal[0m
-[0m[[0m[33mwarn[0m] [0m[0m    assert(opt.map(_ * 2) == 2)[0m
-[0m[[0m[33mwarn[0m] [0m[0m                          ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:374:48: example.Answers.Option[Int] and Int are unrelated: they will most likely never compare equal[0m
+[0m[[0m[33mwarn[0m] [0m[0m    assert(traverse(a.toList)(f).map(_.length) == 50)[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                               ^[0m
 [0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

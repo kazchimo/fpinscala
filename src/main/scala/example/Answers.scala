@@ -1,4 +1,5 @@
 package example
+import scala.collection.immutable
 
 object Answers {
   def fib(n: Int): Int = {
@@ -309,6 +310,13 @@ object Answers {
 
     def filter(f: A => Boolean): Option[A] =
       flatMap(a => if (f(a)) Some(a) else None)
+
+    def isDefined: Boolean = this match {
+      case Some(_) => true
+      case None => false
+    }
+
+    def isEmpty: Boolean = !isDefined
   }
   case class Some[+A](get: A) extends Option[A]
   case object None extends Option[Nothing]
@@ -350,9 +358,30 @@ object Answers {
       bContent <- b
     } yield f(aContent, bContent)
 
+  // 4.4
   def sequence[A](a: List[Option[A]]): Option[List[A]] =
     a.foldLeft(Some(List()): Option[List[A]])(
       (a, e) => map2(a, e)((as, c) => as :+ c)
     )
 
+  // 4.5
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
+    case Nil => Some(Nil)
+    case head :: tails =>
+      for {
+        appliedHead <- f(head)
+        appliedTail <- traverse(tails)(f)
+      } yield appliedHead :: appliedTail
+  }
+
+  def test4_5 = {
+    def f(i: Int): Option[Int] = if (i <= 10) Some(i) else None
+    def g(i: Int): Option[Int] = if (i < 10) Some(i) else None
+    val a: immutable.Seq[Int] = for (i <- 0 to 10) yield i
+
+    assert(traverse(a.toList)(f).isDefined)
+    assert(traverse(a.toList)(g).isEmpty)
+  }
+
 }
+
