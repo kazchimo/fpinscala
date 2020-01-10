@@ -313,7 +313,7 @@ object Answers {
 
     def isDefined: Boolean = this match {
       case Some(_) => true
-      case None => false
+      case None    => false
     }
 
     def isEmpty: Boolean = !isDefined
@@ -383,5 +383,52 @@ object Answers {
     assert(traverse(a.toList)(g).isEmpty)
   }
 
-}
+  // 4.6 4.7
+  sealed trait Either[+E, +A] {
+    def map[B](f: A => B): Either[E, B] = this match {
+      case Right(v)   => Right(f(v))
+      case v: Left[E] => v
+    }
 
+    def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B] = this match {
+      case Right(v)   => f(v)
+      case v: Left[E] => v
+    }
+
+    def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] =
+      this match {
+        case v: Right[A] => v
+        case _: Left[E]  => b
+      }
+
+    def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] =
+      (this, b) match {
+        case (Right(v1), Right(v2)) => Right(f(v1, v2))
+        // (Left, Left)のときどうする？
+        case (v: Left[E], _)  => v
+        case (_, v: Left[EE]) => v
+      }
+
+    def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] = es match {
+      case Nil => Right(Nil)
+      case h :: t =>
+        h match {
+          case v: Left[E]  => v
+          case v: Right[A] => sequence(t).flatMap(l => v.map(_ :: l))
+        }
+    }
+
+    def traverse[E, A, B](
+      as: List[A]
+    )(f: A => Either[E, B]): Either[E, List[B]] = as match {
+      case Nil => Right(Nil)
+      case h :: t =>
+        f(h) match {
+          case v: Left[E]  => v
+          case v: Right[B] => traverse(t)(f).flatMap(l => v.map(_ :: l))
+        }
+    }
+  }
+  case class Left[+E](value: E) extends Either[E, Nothing]
+  case class Right[+A](value: A) extends Either[Nothing, A]
+}

@@ -1,4 +1,11 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:374:48: example.Answers.Option[Int] and Int are unrelated: they will most likely never compare equal[0m
-[0m[[0m[33mwarn[0m] [0m[0m    assert(traverse(a.toList)(f).map(_.length) == 50)[0m
-[0m[[0m[33mwarn[0m] [0m[0m                                               ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:417:49: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : x$38.type (with underlying type example.Answers.Right[A])[0m
+[0m[[0m[31merror[0m] [0m[0m required: A[0m
+[0m[[0m[31merror[0m] [0m[0m          case v: Right[A] => sequence(t).map(v :: _)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/moriyamakazuki/development/Scala/fpinscala/src/main/scala/example/Answers.scala:428:52: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : x$40.type (with underlying type example.Answers.Right[B])[0m
+[0m[[0m[31merror[0m] [0m[0m required: B[0m
+[0m[[0m[31merror[0m] [0m[0m          case v: Right[B] => traverse(t)(f).map(v :: _)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
