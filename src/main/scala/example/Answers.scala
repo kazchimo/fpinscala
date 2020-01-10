@@ -288,147 +288,152 @@ object Answers {
     )
   }
 
-  import scala.{Either => _, Option => _}
+  object EitherAnswers {
+    import scala.{Either => _, Option => _}
 
-  // 4.1
-  sealed trait Option[+A] {
-    def map[B](f: A => B): Option[B] = this match {
-      case Some(v) => Some(f(v))
-      case None    => None
+    // 4.1
+    sealed trait Option[+A] {
+      def map[B](f: A => B): Option[B] = this match {
+        case Some(v) => Some(f(v))
+        case None    => None
+      }
+
+      def flatMap[B](f: A => Option[B]): Option[B] = this map f getOrElse None
+
+      def getOrElse[B >: A](default: => B): B = this match {
+        case Some(v) => v
+        case None    => default
+      }
+
+      def orElse[B >: A](ob: => Option[B]): Option[B] = {
+        this map (Some(_)) getOrElse ob
+      }
+
+      def filter(f: A => Boolean): Option[A] =
+        flatMap(a => if (f(a)) Some(a) else None)
+
+      def isDefined: Boolean = this match {
+        case Some(_) => true
+        case None    => false
+      }
+
+      def isEmpty: Boolean = !isDefined
+    }
+    case class Some[+A](get: A) extends Option[A]
+    case object None extends Option[Nothing]
+
+    def test_41: Unit = {
+      val opt = Some(1)
+      val none: Option[Int] = None
+
+      assert(opt.map(_ * 2) == Some(2))
+      assert(none.map(_ * 2) == None)
+
+      assert(opt.flatMap((a: Int) => Some(a * 2)) == Some(2))
+      assert(opt.flatMap((_: Int) => None) == None)
+      assert(none.flatMap((_: Int) => Some(1)) == None)
+
+      assert(opt.getOrElse(2) == 1)
+      assert(none.getOrElse(2) == 2)
+
+      assert(opt.orElse(Some(2)) == Some(1))
+      assert(none.orElse(Some(2)) == Some(2))
+
+      assert(opt.filter((a: Int) => a == 1) == Some(1))
+      assert(opt.filter((a: Int) => a == 2) == None)
+      assert(none.filter((a: Int) => a == 1) == None)
     }
 
-    def flatMap[B](f: A => Option[B]): Option[B] = this map f getOrElse None
+    // 4.2
+    def variance(xs: Seq[Double]): Option[Double] = {
+      def mean(xs: Seq[Double]) =
+        if (xs.isEmpty) None else Some(xs.sum / xs.length)
 
-    def getOrElse[B >: A](default: => B): B = this match {
-      case Some(v) => v
-      case None    => default
+      mean(xs) flatMap (m => mean(xs.map(x => math.pow(x - m, 2))))
     }
 
-    def orElse[B >: A](ob: => Option[B]): Option[B] = {
-      this map (Some(_)) getOrElse ob
-    }
-
-    def filter(f: A => Boolean): Option[A] =
-      flatMap(a => if (f(a)) Some(a) else None)
-
-    def isDefined: Boolean = this match {
-      case Some(_) => true
-      case None    => false
-    }
-
-    def isEmpty: Boolean = !isDefined
-  }
-  case class Some[+A](get: A) extends Option[A]
-  case object None extends Option[Nothing]
-
-  def test_41: Unit = {
-    val opt = Some(1)
-    val none: Option[Int] = None
-
-    assert(opt.map(_ * 2) == Some(2))
-    assert(none.map(_ * 2) == None)
-
-    assert(opt.flatMap((a: Int) => Some(a * 2)) == Some(2))
-    assert(opt.flatMap((_: Int) => None) == None)
-    assert(none.flatMap((_: Int) => Some(1)) == None)
-
-    assert(opt.getOrElse(2) == 1)
-    assert(none.getOrElse(2) == 2)
-
-    assert(opt.orElse(Some(2)) == Some(1))
-    assert(none.orElse(Some(2)) == Some(2))
-
-    assert(opt.filter((a: Int) => a == 1) == Some(1))
-    assert(opt.filter((a: Int) => a == 2) == None)
-    assert(none.filter((a: Int) => a == 1) == None)
-  }
-
-  // 4.2
-  def variance(xs: Seq[Double]): Option[Double] = {
-    def mean(xs: Seq[Double]) =
-      if (xs.isEmpty) None else Some(xs.sum / xs.length)
-
-    mean(xs) flatMap (m => mean(xs.map(x => math.pow(x - m, 2))))
-  }
-
-  // 4.3
-  def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
-    for {
-      aContent <- a
-      bContent <- b
-    } yield f(aContent, bContent)
-
-  // 4.4
-  def sequence[A](a: List[Option[A]]): Option[List[A]] =
-    a.foldLeft(Some(List()): Option[List[A]])(
-      (a, e) => map2(a, e)((as, c) => as :+ c)
-    )
-
-  // 4.5
-  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = a match {
-    case Nil => Some(Nil)
-    case head :: tails =>
+    // 4.3
+    def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
       for {
-        appliedHead <- f(head)
-        appliedTail <- traverse(tails)(f)
-      } yield appliedHead :: appliedTail
-  }
+        aContent <- a
+        bContent <- b
+      } yield f(aContent, bContent)
 
-  def test4_5 = {
-    def f(i: Int): Option[Int] = if (i <= 10) Some(i) else None
-    def g(i: Int): Option[Int] = if (i < 10) Some(i) else None
-    val a: immutable.Seq[Int] = for (i <- 0 to 10) yield i
+    // 4.4
+    def sequence[A](a: List[Option[A]]): Option[List[A]] =
+      a.foldLeft(Some(List()): Option[List[A]])(
+        (a, e) => map2(a, e)((as, c) => as :+ c)
+      )
 
-    assert(traverse(a.toList)(f).isDefined)
-    assert(traverse(a.toList)(g).isEmpty)
-  }
-
-  // 4.6 4.7
-  sealed trait Either[+E, +A] {
-    def map[B](f: A => B): Either[E, B] = this match {
-      case Right(v)   => Right(f(v))
-      case v: Left[E] => v
-    }
-
-    def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B] = this match {
-      case Right(v)   => f(v)
-      case v: Left[E] => v
-    }
-
-    def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] =
-      this match {
-        case v: Right[A] => v
-        case _: Left[E]  => b
+    // 4.5
+    def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] =
+      a match {
+        case Nil => Some(Nil)
+        case head :: tails =>
+          for {
+            appliedHead <- f(head)
+            appliedTail <- traverse(tails)(f)
+          } yield appliedHead :: appliedTail
       }
 
-    def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] =
-      (this, b) match {
-        case (Right(v1), Right(v2)) => Right(f(v1, v2))
-        // (Left, Left)のときどうする？
-        case (v: Left[E], _)  => v
-        case (_, v: Left[EE]) => v
+    def test4_5 = {
+      def f(i: Int): Option[Int] = if (i <= 10) Some(i) else None
+      def g(i: Int): Option[Int] = if (i < 10) Some(i) else None
+      val a: immutable.Seq[Int] = for (i <- 0 to 10) yield i
+
+      assert(traverse(a.toList)(f).isDefined)
+      assert(traverse(a.toList)(g).isEmpty)
+    }
+
+    // 4.6 4.7
+    sealed trait Either[+E, +A] {
+      def map[B](f: A => B): Either[E, B] = this match {
+        case Right(v)   => Right(f(v))
+        case v: Left[E] => v
       }
 
-    def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] = es match {
-      case Nil => Right(Nil)
-      case h :: t =>
-        h match {
-          case v: Left[E]  => v
-          case v: Right[A] => sequence(t).flatMap(l => v.map(_ :: l))
+      def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B] =
+        this match {
+          case Right(v)   => f(v)
+          case v: Left[E] => v
         }
-    }
 
-    def traverse[E, A, B](
-      as: List[A]
-    )(f: A => Either[E, B]): Either[E, List[B]] = as match {
-      case Nil => Right(Nil)
-      case h :: t =>
-        f(h) match {
-          case v: Left[E]  => v
-          case v: Right[B] => traverse(t)(f).flatMap(l => v.map(_ :: l))
+      def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] =
+        this match {
+          case v: Right[A] => v
+          case _: Left[E]  => b
         }
+
+      def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] =
+        (this, b) match {
+          case (Right(v1), Right(v2)) => Right(f(v1, v2))
+          // (Left, Left)のときどうする？
+          case (v: Left[E], _)  => v
+          case (_, v: Left[EE]) => v
+        }
+
+      def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] =
+        es match {
+          case Nil => Right(Nil)
+          case h :: t =>
+            h match {
+              case v: Left[E]  => v
+              case v: Right[A] => sequence(t).flatMap(l => v.map(_ :: l))
+            }
+        }
+
+      def traverse[E, A, B](
+        as: List[A]
+      )(f: A => Either[E, B]): Either[E, List[B]] = as match {
+        case Nil => Right(Nil)
+        case h :: t =>
+          f(h) match {
+            case v: Left[E]  => v
+            case v: Right[B] => traverse(t)(f).flatMap(l => v.map(_ :: l))
+          }
+      }
     }
+    case class Left[+E](value: E) extends Either[E, Nothing]
+    case class Right[+A](value: A) extends Either[Nothing, A]
   }
-  case class Left[+E](value: E) extends Either[E, Nothing]
-  case class Right[+A](value: A) extends Either[Nothing, A]
 }
